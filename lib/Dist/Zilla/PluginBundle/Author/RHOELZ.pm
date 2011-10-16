@@ -44,6 +44,7 @@ sub configure {
         'Git::Tag' => {
             tag_format  => '%v',
             tag_message => '%v',
+            signed      => 1,
         },
     ]);
 
