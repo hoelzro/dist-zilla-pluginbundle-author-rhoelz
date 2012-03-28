@@ -126,6 +126,7 @@ equivalent to the following:
   [Git::Tag]
   tag_format  = %v
   tag_message = %v
+  signed      = 1
   [Git::NextVersion]
   first_version  = 0.01
   version_regexp = ^(\d+\.\d+)$
