@@ -87,6 +87,7 @@ sub configure {
     ]);
 
     $self->add_plugins(
+        'Git::ExcludeUntracked',
         'CheckChangesHasContent',
         'ConfirmRelease',
         'UploadToCPAN',
@@ -152,6 +153,7 @@ equivalent to the following:
   [PruneFiles]
   filename = dist.ini
   filename = weaver.ini
+  [Git::ExcludeUntracked]
   [CheckChangesHasContent]
   [ConfirmRelease]
   [UploadToCPAN]
