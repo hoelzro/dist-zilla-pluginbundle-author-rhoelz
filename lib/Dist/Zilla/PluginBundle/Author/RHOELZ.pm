@@ -87,6 +87,7 @@ sub configure {
     ]);
 
     $self->add_plugins(
+        'CheckChangesHasContent',
         'ConfirmRelease',
         'UploadToCPAN',
         'PkgVersion',
@@ -151,6 +152,7 @@ equivalent to the following:
   [PruneFiles]
   filename = dist.ini
   filename = weaver.ini
+  [CheckChangesHasContent]
   [ConfirmRelease]
   [UploadToCPAN]
   [PkgVersion]
