@@ -162,4 +162,14 @@ equivalent to the following:
 
 L<Dist::Zilla>
 
+=begin comment
+
+=over
+
+=item configure
+
+=back
+
+=end comment
+
 =cut
