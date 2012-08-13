@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.03 August 13 2012
      - Add ability to omit plugins
      - Add abliity to specify custom configuration for included plugins
 
