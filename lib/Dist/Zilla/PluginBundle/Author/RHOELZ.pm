@@ -222,6 +222,20 @@ equivalent to the following:
   [PkgVersion]
   [PodWeaver]
 
+=head1 CUSTOMIZATION
+
+You may omit a plugin using C<-omit>:
+
+  [@Author::RHOELZ]
+  -omit = UploadToCPAN
+
+You may also provide a custom configuration for a plugin; this B<must> precede
+the main C<@Author::RHOELZ> section.
+
+  [@Author::RHOELZ / Test::Kwalitee]
+  skiptest = use_strict
+  [@Author::RHOELZ]
+
 =head1 SEE ALSO
 
 L<Dist::Zilla>
