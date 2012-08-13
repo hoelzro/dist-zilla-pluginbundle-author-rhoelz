@@ -27,7 +27,7 @@ around add_plugins => sub {
     foreach my $spec (@specs) {
         my $name = ref($spec) ? $spec->[0] : $spec;
 
-        if($self->omissions->{$name}) {
+        if(delete $self->omissions->{$name}) {
             undef $spec;
         }
     }
@@ -36,6 +36,17 @@ around add_plugins => sub {
 
     goto &$orig;
 };
+
+sub check_omissions {
+    my ( $self ) = @_;
+
+    my $omissions = $self->omissions;
+
+    if(%$omissions) {
+        die "You asked to omit the following plugins, but they were not included in the bundle:\n" .
+            join('', map { "  $_\n" } sort keys %$omissions);
+    }
+}
 
 sub configure {
     my ( $self ) = @_;
@@ -143,6 +154,8 @@ sub configure {
         'PkgVersion',
         'PodWeaver',
     );
+
+    $self->check_omissions;
 }
 
 __PACKAGE__->meta->make_immutable;
