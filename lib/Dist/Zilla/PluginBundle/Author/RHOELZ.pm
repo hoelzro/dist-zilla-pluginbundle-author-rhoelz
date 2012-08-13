@@ -9,8 +9,40 @@ use Moose;
 
 with 'Dist::Zilla::Role::PluginBundle::Easy';
 
+has omissions => (
+    is      => 'ro',
+    default => sub { {} },
+);
+
+sub mvp_multivalue_args {
+    return '-omit';
+}
+
+around add_plugins => sub {
+    my ( $orig, $self, @specs ) = @_;
+
+    foreach my $spec (@specs) {
+        my $name = ref($spec) ? $spec->[0] : $spec;
+
+        if($self->omissions->{$name}) {
+            undef $spec;
+        }
+    }
+
+    @_ = ( $self, grep { defined() } @specs );
+
+    goto &$orig;
+};
+
 sub configure {
     my ( $self ) = @_;
+
+    my $omit = $self->payload->{'-omit'};
+    if($omit) {
+        foreach my $plugin (@$omit) {
+            $self->omissions->{$plugin} = 1;
+        }
+    }
 
     $self->add_plugins([
         GithubMeta => {
