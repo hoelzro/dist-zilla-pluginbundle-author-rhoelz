@@ -9,9 +9,12 @@ use Moose;
 
 with 'Dist::Zilla::Role::PluginBundle::Easy';
 
+my $main_section_processed;
+my %global_omissions;
+
 has omissions => (
     is      => 'ro',
-    default => sub { {} },
+    default => sub { +{ %global_omissions } },
 );
 
 sub mvp_multivalue_args {
@@ -36,6 +39,20 @@ around add_plugins => sub {
 
 sub configure {
     my ( $self ) = @_;
+
+    unless($self->name eq '@Author::RHOELZ') {
+        if($main_section_processed) {
+            die("Custom configuration sections for Author::RHOELZ sections must precede the main one\n");
+        }
+        $global_omissions{$self->name} = 1;
+        $self->add_plugins([
+            $self->name,
+            $self->payload,
+        ]);
+        return;
+    }
+
+    $main_section_processed = 1;
 
     my $omit = $self->payload->{'-omit'};
     if($omit) {
