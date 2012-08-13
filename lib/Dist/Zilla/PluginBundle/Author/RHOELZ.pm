@@ -246,6 +246,10 @@ L<Dist::Zilla>
 
 =item configure
 
+=item mvp_multivalue_args
+
+=item check_omissions
+
 =back
 
 =end comment
