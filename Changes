@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+     - Add ability to omit plugins
+     - Add abliity to specify custom configuration for included plugins
 
 0.02 April 11 2012
      - Add Git::ExcludeUntracked

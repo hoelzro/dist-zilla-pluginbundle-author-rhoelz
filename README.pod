@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -64,6 +64,20 @@ equivalent to the following:
   [PkgVersion]
   [PodWeaver]
 
+=head1 CUSTOMIZATION
+
+You may omit a plugin using C<-omit>:
+
+  [@Author::RHOELZ]
+  -omit = UploadToCPAN
+
+You may also provide a custom configuration for a plugin; this B<must> precede
+the main C<@Author::RHOELZ> section.
+
+  [@Author::RHOELZ / Test::Kwalitee]
+  skiptest = use_strict
+  [@Author::RHOELZ]
+
 =head1 SEE ALSO
 
 L<Dist::Zilla>
@@ -73,6 +87,10 @@ L<Dist::Zilla>
 =over
 
 =item configure
+
+=item mvp_multivalue_args
+
+=item check_omissions
 
 =back
 
