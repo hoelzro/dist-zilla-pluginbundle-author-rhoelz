@@ -6,7 +6,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
