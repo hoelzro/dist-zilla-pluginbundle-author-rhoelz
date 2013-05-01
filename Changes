@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+     - Fix bug that prevents one from specifying multiple arguments
+       for a custom plugin section (ex. PruneFiles + filenames)
 
 0.03 August 13 2012
      - Add ability to omit plugins
