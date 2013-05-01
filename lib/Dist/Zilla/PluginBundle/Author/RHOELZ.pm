@@ -317,6 +317,8 @@ L<Dist::Zilla>
 
 =item check_omissions
 
+=item invert_hash
+
 =back
 
 =end comment
