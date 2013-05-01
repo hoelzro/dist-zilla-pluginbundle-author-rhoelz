@@ -6,6 +6,7 @@ use strict;
 use warnings;
 
 use Moose;
+use Class::Load qw(load_class);
 
 with 'Dist::Zilla::Role::PluginBundle::Easy';
 
@@ -17,8 +18,74 @@ has omissions => (
     default => sub { +{ %global_omissions } },
 );
 
+sub invert_hash {
+    my ( $hash ) = @_;
+
+    my %inverted;
+
+    foreach my $key (keys %$hash) {
+        my $value = $hash->{$key};
+
+        if(exists $inverted{$value}) {
+            if(ref($inverted{$value}) eq 'ARRAY') {
+                push @{ $inverted{$value} }, $key;
+            } else {
+                $inverted{$value} = [ $inverted{$value}, $key ];
+            }
+        } else {
+            $inverted{$value} = $key;
+        }
+    }
+
+    return \%inverted;
+}
+
 sub mvp_multivalue_args {
-    return '-omit';
+    my ( $class ) = @_;
+
+    # use a dummy instance to grab our plugin list;
+    # we might want to resort to a manually provided
+    # list
+    my $instance = $class->new(
+        name    => '@Author::RHOELZ',
+        payload => {},
+    );
+    $instance->configure;
+    $main_section_processed = 0; # trick this plugin
+
+    my $plugins = $instance->plugins;
+
+    my %multiargs = map { $_ => 1 } ('-omit');
+
+    # gather mvp_multivalue_args from child plugins
+    # and use those
+    foreach my $plugin (@$plugins) {
+        $plugin = $plugin->[1];
+
+        load_class($plugin);
+        next unless $plugin->can('mvp_multivalue_args');
+
+        my @plugin_multiargs = $plugin->mvp_multivalue_args;
+
+        # if an option has aliases, make sure we can specify
+        # multiples of that aliase as well
+        if($plugin->can('mvp_aliases')) {
+            my $alias_map = invert_hash($plugin->mvp_aliases);
+
+            my @additional;
+            foreach my $arg (@plugin_multiargs) {
+                my $aliases = $alias_map->{$arg};
+                next unless defined $aliases;
+                $aliases = [ $aliases ] unless ref($aliases) eq 'ARRAY';
+                push @additional, @$aliases;
+            }
+
+            push @plugin_multiargs, @additional;
+        }
+        @multiargs{@plugin_multiargs} = (1) x @plugin_multiargs;
+    }
+
+    return keys %multiargs;
 }
 
 around add_plugins => sub {
