@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.05 March 03 2014
      - Include .perlcriticrc if it exists in a dist
 
 0.04 May 01 2013
