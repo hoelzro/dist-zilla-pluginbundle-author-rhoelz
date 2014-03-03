@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+     - Include .perlcriticrc if it exists in a dist
 
 0.04 May 01 2013
      - Fix bug that prevents one from specifying multiple arguments
