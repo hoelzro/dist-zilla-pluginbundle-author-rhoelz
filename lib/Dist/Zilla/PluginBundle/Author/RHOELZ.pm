@@ -190,9 +190,19 @@ sub configure {
         },
     ]);
 
+    $self->add_plugins([
+        GatherDir => {
+            include_dotfiles => 1,
+        },
+    ]);
+
+    $self->add_plugins([
+        PruneCruft => {
+            except => '\.perlcriticrc',
+        },
+    ]);
+
     $self->add_plugins(
-        'GatherDir',
-        'PruneCruft',
         'MetaYAML',
         'License',
         'Readme',
@@ -266,7 +276,9 @@ equivalent to the following:
   filename = README.pod
   location = root
   [GatherDir]
+  include_dotfiles = 1
   [PruneCruft]
+  except = \.perlcriticrc
   [MetaYAML]
   [License]
   [Readme]
