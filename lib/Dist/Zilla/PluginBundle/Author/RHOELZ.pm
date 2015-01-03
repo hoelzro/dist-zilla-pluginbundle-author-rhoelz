@@ -118,7 +118,7 @@ sub check_omissions {
 sub configure {
     my ( $self ) = @_;
 
-    unless($self->name eq '@Author::RHOELZ') {
+    if($self->name ne '@Author::RHOELZ' && $self->name !~ /^@/) {
         if($main_section_processed) {
             die("Custom configuration sections for Author::RHOELZ sections must precede the main one\n");
         }
