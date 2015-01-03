@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+     - Fix bug that prevents this bundle from being used with @Filter
 
 0.05 March 03 2014
      - Include .perlcriticrc if it exists in a dist
