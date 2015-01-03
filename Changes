@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.06 January 03 2015
      - Fix bug that prevents this bundle from being used with @Filter
 
 0.05 March 03 2014
