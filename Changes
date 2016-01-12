@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+     - Use Git::GatherDir instead of my deprecated plugin
 
 0.06 January 03 2015
      - Fix bug that prevents this bundle from being used with @Filter
