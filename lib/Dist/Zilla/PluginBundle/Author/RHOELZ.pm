@@ -191,7 +191,7 @@ sub configure {
     ]);
 
     $self->add_plugins([
-        GatherDir => {
+        'Git::GatherDir' => {
             include_dotfiles => 1,
         },
     ]);
@@ -224,7 +224,6 @@ sub configure {
     ]);
 
     $self->add_plugins(
-        'Git::ExcludeUntracked',
         'CheckChangesHasContent',
         'ConfirmRelease',
         'UploadToCPAN',
@@ -275,7 +274,7 @@ equivalent to the following:
   type     = pod
   filename = README.pod
   location = root
-  [GatherDir]
+  [Git::GatherDir]
   include_dotfiles = 1
   [PruneCruft]
   except = \.perlcriticrc
@@ -294,7 +293,6 @@ equivalent to the following:
   [PruneFiles]
   filename = dist.ini
   filename = weaver.ini
-  [Git::ExcludeUntracked]
   [CheckChangesHasContent]
   [ConfirmRelease]
   [UploadToCPAN]
