@@ -8,7 +8,7 @@ Dist::Zilla::PluginBundle::Author::RHOELZ - BeLike::RHOELZ when you build your d
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ equivalent to the following:
   type     = pod
   filename = README.pod
   location = root
-  [GatherDir]
+  [Git::GatherDir]
   include_dotfiles = 1
   [PruneCruft]
   except = \.perlcriticrc
@@ -61,7 +61,6 @@ equivalent to the following:
   [PruneFiles]
   filename = dist.ini
   filename = weaver.ini
-  [Git::ExcludeUntracked]
   [CheckChangesHasContent]
   [ConfirmRelease]
   [UploadToCPAN]
