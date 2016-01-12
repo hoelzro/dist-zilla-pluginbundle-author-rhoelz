@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.07 January 12 2016
      - Use Git::GatherDir instead of my deprecated plugin
 
 0.06 January 03 2015
